@@ -1,5 +1,5 @@
 def merge_sort(values):
-    """Return a sorted copy of values using merge sort."""
+    """Return a stable sorted copy; O(n log n) time and O(n) auxiliary space."""
     if len(values) <= 1:
         return list(values)
 
@@ -15,7 +15,7 @@ def _merge(left, right):
     j = 0
 
     while i < len(left) and j < len(right):
-        if left[i] <= right[j]:
+        if not right[j] < left[i]:
             result.append(left[i])
             i += 1
         else:

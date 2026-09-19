@@ -22,9 +22,30 @@ docs/
 
 ## Clean Reference Implementations
 
+Requires Python 3.11+. From the repository root:
+
 ```bash
-pytest
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements-dev.txt
+python -m pytest
 ```
+
+`make test` runs the same pytest suite. Collection is restricted to `tests/`:
+original exercises may read stdin or run demonstrations on import.
+
+The reference suite checks exhaustive small input combinations against Python's
+built-in search/sort behavior, stable sorting with custom `__lt__` objects,
+non-mutation, and stack/queue lifecycle errors. GitHub Actions exercises Python
+3.11–3.13; AWS CodeBuild uses the same tests.
+
+| Operation | Time | Extra space | Contract |
+| --- | --- | --- | --- |
+| Linear search | O(n) | O(1) | First matching index, or -1 |
+| Binary search | O(log n) | O(1) | Ascending input; any matching index, or -1 |
+| Merge sort | O(n log n) | O(n) | Stable new list; mutually orderable elements |
+| Stack push / pop | O(1) amortized | O(n) storage | LIFO; empty pop/peek raises IndexError |
+| Queue enqueue / dequeue | O(1) | O(n) storage | FIFO; empty dequeue raises IndexError |
 
 Current reference modules:
 
@@ -47,4 +68,4 @@ For every topic:
 
 This is the primary home for Python algorithm, DSA, and revision work.
 
-Next upgrade: expand edge-case tests and add time/space complexity notes for each clean implementation in `src/dsa/`.
+The archived exercises are historical learning material; the supported, CI-tested surface is `src/dsa/`.
